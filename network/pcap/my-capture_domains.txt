@@ -1,0 +1,3 @@
+a1446.dscr.akamai.net
+easylist-downloads.adblockplus.org
+ssl.gstatic.com

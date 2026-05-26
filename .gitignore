@@ -1,0 +1,21 @@
+# PCAP files (too large for GitHub)
+*.pcap
+*.pcapng
+*.cap
+
+# Environment
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log

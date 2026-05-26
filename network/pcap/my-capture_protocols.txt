@@ -1,0 +1,24 @@
+
+===================================================================
+Protocol Hierarchy Statistics
+Filter: 
+
+frame                                    frames:194 bytes:33159
+  eth                                    frames:194 bytes:33159
+    arp                                  frames:77 bytes:4620
+    ip                                   frames:91 bytes:24449
+      tcp                                frames:54 bytes:8494
+        tls                              frames:23 bytes:6410
+      udp                                frames:32 bytes:15683
+        mdns                             frames:4 bytes:1070
+        data                             frames:4 bytes:333
+        quic                             frames:24 bytes:14280
+          quic                           frames:1 bytes:320
+      igmp                               frames:5 bytes:272
+    ipv6                                 frames:26 bytes:4090
+      udp                                frames:14 bytes:2706
+        mdns                             frames:2 bytes:644
+        dns                              frames:12 bytes:2062
+      tcp                                frames:2 bytes:188
+      icmpv6                             frames:10 bytes:1196
+===================================================================

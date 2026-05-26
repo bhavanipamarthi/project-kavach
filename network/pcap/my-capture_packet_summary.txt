@@ -1,0 +1,50 @@
+21:43:54.154803 ARP, Request who-has 192.168.0.26 tell 192.168.0.181, length 46
+21:43:54.265915 IP 192.168.0.116.54920 > 52.123.168.145.443: Flags [P.], seq 1471868323:1471868374, ack 3425002327, win 55, options [nop,nop,TS val 2587308186 ecr 545799095], length 51
+21:43:54.564529 IP 52.123.168.145.443 > 192.168.0.116.54920: Flags [P.], seq 1:41, ack 51, win 644, options [nop,nop,TS val 545813856 ecr 2587308186], length 40
+21:43:54.564566 IP 192.168.0.116.54920 > 52.123.168.145.443: Flags [.], ack 41, win 55, options [nop,nop,TS val 2587308485 ecr 545813856], length 0
+21:43:54.975755 IP 192.168.0.128.5353 > 224.0.0.251.5353: 0*- [0q] 4/0/0 PTR BRAVIA-4K-VH2-f69e6bb991f0858e78e98f4299eb7022._googlecast._tcp.local., (Cache flush) TXT "id=f69e6bb991f0858e78e98f4299eb7022" "cd=A245404E9D4C693415FBC838C46EFDEC" "rm=75FB2CB39870237F" "ve=05" "md=BRAVIA 4K VH2" "ic=/setup/icon.png" "fn=Bedroom TV" "ca=264709" "st=0" "bs=FA8F46F6641E" "nf=1" "rs=", (Cache flush) SRV f69e6bb9-91f0-858e-78e9-8f4299eb7022.local.:8009 0 0, (Cache flush) A 192.168.0.128 (368)
+21:43:54.975756 IP 192.168.0.128.5353 > 224.0.0.251.5353: 0*- [0q] 1/0/0 PTR BRAVIA-4K-VH2-f69e6bb991f0858e78e98f4299eb7022._googlecast._tcp.local. (140)
+21:43:54.975756 IP6 fe80::2c01:8fc6:efe:ce52.5353 > ff02::fb.5353: 0*- [0q] 4/0/0 PTR BRAVIA-4K-VH2-f69e6bb991f0858e78e98f4299eb7022._googlecast._tcp.local., (Cache flush) TXT "id=f69e6bb991f0858e78e98f4299eb7022" "cd=A245404E9D4C693415FBC838C46EFDEC" "rm=75FB2CB39870237F" "ve=05" "md=BRAVIA 4K VH2" "ic=/setup/icon.png" "fn=Bedroom TV" "ca=264709" "st=0" "bs=FA8F46F6641E" "nf=1" "rs=", (Cache flush) SRV f69e6bb9-91f0-858e-78e9-8f4299eb7022.local.:8009 0 0, (Cache flush) AAAA fd01::6af4:b4bd:2ee3:83b4 (380)
+21:43:54.975756 IP6 fe80::2c01:8fc6:efe:ce52.5353 > ff02::fb.5353: 0*- [0q] 1/0/0 PTR BRAVIA-4K-VH2-f69e6bb991f0858e78e98f4299eb7022._googlecast._tcp.local. (140)
+21:43:55.178873 ARP, Request who-has 192.168.0.26 tell 192.168.0.181, length 46
+21:43:55.562932 IP 192.168.0.116.54182 > 163.70.140.60.5222: Flags [P.], seq 175215280:175215350, ack 1458773825, win 72, options [nop,nop,TS val 777912917 ecr 2193336696], length 70
+21:43:55.564398 IP 192.168.0.116.42434 > 172.217.24.202.443: UDP, length 29
+21:43:55.567756 IP 163.70.140.60.5222 > 192.168.0.116.54182: Flags [.], ack 70, win 1035, options [nop,nop,TS val 2193357717 ecr 777912917], length 0
+21:43:55.591822 IP 172.217.24.202.443 > 192.168.0.116.42434: UDP, length 25
+21:43:55.694243 ARP, Request who-has 47.252.8.80 tell 192.168.0.24, length 46
+21:43:55.694244 ARP, Request who-has 47.74.153.98 tell 192.168.0.24, length 46
+21:43:55.694244 ARP, Request who-has 139.9.5.224 tell 192.168.0.24, length 46
+21:43:55.795564 IP 163.70.140.60.5222 > 192.168.0.116.54182: Flags [P.], seq 1:73, ack 70, win 1035, options [nop,nop,TS val 2193357916 ecr 777912917], length 72
+21:43:55.837308 IP 192.168.0.116.54182 > 163.70.140.60.5222: Flags [.], ack 73, win 72, options [nop,nop,TS val 777913192 ecr 2193357916], length 0
+21:43:56.204252 ARP, Request who-has 192.168.0.26 tell 192.168.0.181, length 46
+21:43:56.204252 ARP, Request who-has 192.168.0.224 tell 192.168.0.181, length 46
+21:43:56.409204 ARP, Request who-has 47.252.8.80 tell 192.168.0.27, length 46
+21:43:56.409204 ARP, Request who-has 47.74.153.98 tell 192.168.0.27, length 46
+21:43:56.409340 ARP, Request who-has 139.9.5.224 tell 192.168.0.27, length 46
+21:43:56.514251 ARP, Request who-has 47.252.8.80 tell 192.168.0.25, length 46
+21:43:56.514252 ARP, Request who-has 47.74.153.98 tell 192.168.0.25, length 46
+21:43:56.514252 ARP, Request who-has 139.9.5.224 tell 192.168.0.25, length 46
+21:43:56.716918 ARP, Request who-has 139.9.5.224 tell 192.168.0.24, length 46
+21:43:56.716919 ARP, Request who-has 47.74.153.98 tell 192.168.0.24, length 46
+21:43:56.716919 ARP, Request who-has 47.252.8.80 tell 192.168.0.24, length 46
+21:43:57.332356 ARP, Request who-has 192.168.0.224 tell 192.168.0.181, length 46
+21:43:57.332356 ARP, Request who-has 192.168.0.26 tell 192.168.0.181, length 46
+21:43:57.433972 ARP, Request who-has 139.9.5.224 tell 192.168.0.27, length 46
+21:43:57.433973 ARP, Request who-has 47.74.153.98 tell 192.168.0.27, length 46
+21:43:57.433973 ARP, Request who-has 47.252.8.80 tell 192.168.0.27, length 46
+21:43:57.505328 IP 192.168.0.116.58044 > 163.181.201.186.443: Flags [.], ack 2414707489, win 61, length 0
+21:43:57.535652 ARP, Request who-has 139.9.5.224 tell 192.168.0.25, length 46
+21:43:57.535652 ARP, Request who-has 47.74.153.98 tell 192.168.0.25, length 46
+21:43:57.535652 ARP, Request who-has 47.252.8.80 tell 192.168.0.25, length 46
+21:43:57.552346 IP 163.181.201.186.443 > 192.168.0.116.58044: Flags [.], ack 1, win 83, length 0
+21:43:57.740904 ARP, Request who-has 47.252.8.80 tell 192.168.0.24, length 46
+21:43:57.740904 ARP, Request who-has 47.74.153.98 tell 192.168.0.24, length 46
+21:43:57.741239 ARP, Request who-has 139.9.5.224 tell 192.168.0.24, length 46
+21:43:58.340639 IP 192.168.0.116.46600 > 192.168.0.128.8009: Flags [P.], seq 3982459087:3982459197, ack 2413464353, win 52, options [nop,nop,TS val 3636378479 ecr 407795596], length 110
+21:43:58.355704 ARP, Request who-has 192.168.0.26 tell 192.168.0.181, length 46
+21:43:58.356856 ARP, Request who-has 192.168.0.224 tell 192.168.0.181, length 46
+21:43:58.358971 IP 192.168.0.128.8009 > 192.168.0.116.46600: Flags [P.], seq 1:111, ack 110, win 1205, options [nop,nop,TS val 407800621 ecr 3636378479], length 110
+21:43:58.359048 IP 192.168.0.116.46600 > 192.168.0.128.8009: Flags [.], ack 111, win 52, options [nop,nop,TS val 3636378497 ecr 407800621], length 0
+21:43:58.459492 ARP, Request who-has 47.252.8.80 tell 192.168.0.27, length 46
+21:43:58.459493 ARP, Request who-has 47.74.153.98 tell 192.168.0.27, length 46
+21:43:58.459493 ARP, Request who-has 139.9.5.224 tell 192.168.0.27, length 46
