@@ -1,0 +1,18 @@
+# Current Architecture (Before)
+
+```mermaid
+graph TD
+    A[Branch Offices] --> B[Server Segment]
+    B --> C[Web Portal Servers]
+    B --> D[Internal DB]
+    C --> E[Internet - No Egress Filter]
+    B --> F[External C2 Servers]
+    style F fill:#ffcccc
+
+Current State Issues:
+
+Flat network → Easy lateral movement
+No egress filtering → C2 beaconing possible
+Weak segmentation between web and internal servers
+
+
