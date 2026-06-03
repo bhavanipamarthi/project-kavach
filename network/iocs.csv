@@ -1,0 +1,7 @@
+Indicator,Type,Confidence,PacketRange,Notes
+185.203.117.XX,IP,High,100-450,C2 Beaconing Server (Hancitor)
+91.92.XX.XX,IP,High,500-850,Ficker Stealer C2
+hancitor[.]example[.]com,Domain,Medium,1200+,DNS Beaconing
+JA3:d0a8e3f9...,JA3 Fingerprint,High,Multiple,Cobalt Strike pattern
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0),User-Agent,Medium,Many,Malware common UA
+/somepayload.exe,URI,High,Exfil,Data Exfiltration attempt
