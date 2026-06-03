@@ -28,3 +28,12 @@ This engagement follows the official **PROJECT KAVACH** brief. It involves:
 Both deployed via Docker.
 
 ## Repository Structure
+├── network/              # Workstream A (Forensics)
+├── webapp/               # Workstream B (Web Assessment)
+├── synthesis/            # Workstream C (Synthesis)
+├── prompts/              # LLM Prompt Logs
+├── reflections/          # Individual Reflections
+└── retro.md
+
+
+**Status**: In Progress | All artifacts will be reproducible with free/open-source tools only.
