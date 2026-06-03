@@ -1,0 +1,19 @@
+# Proposed Architecture (After)
+
+```mermaid
+graph TD
+    A[Branch Offices] --> G[Jump Host]
+    G --> B[Micro-Segmented Server Segment]
+    B --> C[Web Portal Servers]
+    B --> D[Internal DB]
+    C --> H[WAF + Egress Filter]
+    H --> E[Internet]
+    B -.-> I[East-West Microsegmentation]
+    style I fill:#90EE90
+
+Key Improvements:
+
+Jump hosts for admin access
+East-West microsegmentation
+Egress filtering + WAF
+Better containment of compromised servers
