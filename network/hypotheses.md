@@ -1,92 +1,85 @@
 # Workstream A.3: Hypothesis-Driven Deep Dive
 
-**PCAP**: 2021-05-13-Hancitor-traffic-with-Ficker-Stealer-and-Cobalt-Strike.pcap
-**Analyst**: [Your Name]
+**PCAP**: PhantomStealer infection (2026-01-30)
+**Analyst**: Bhavani Pamarthi
+**Date**: 2026-06-04
 
----
-
-## Hypothesis 1: Initial Infection via Malicious Document Download
-
-### What would confirm this hypothesis:
-- HTTP GET request to a suspicious domain delivering a malicious payload (e.g., .doc, .docm)
-- Subsequent DNS queries for additional domains
-- Process creation events (if available) showing Office application launching script interpreters
-
-### What would refute this hypothesis:
-- No HTTP traffic containing Office documents
-- All downloads hash to known legitimate software
-- Traffic pattern matches normal user browsing behavior
-
-### Evidence Found:
-[You'll fill this in after analyzing the PCAP]
-
-**Packet ranges**: e.g., frames 4500-5200
-**Key indicators**: 
-- URI: /invoice.doc
-- Source IP: 192.168.1.105 → Destination: 185.130.5.253
-
-### Verdict: [CONFIRMED / REFUTED / INCONCLUSIVE]
-**Confidence**: High / Medium / Low
-**Reasoning**: [2-3 sentences explaining your conclusion]
-
----
-
-## Hypothesis 2: Cobalt Strike C2 Beaconing
+## Hypothesis 1: C2 Beaconing & Data Exfiltration
 
 ### What would confirm this hypothesis:
-- Periodic HTTPS traffic to the same destination at consistent intervals (e.g., every 60 seconds)
-- JA3/JA3S fingerprints matching known Cobalt Strike patterns
-- Response sizes following typical beacon patterns (e.g., small POST requests with varied response lengths)
+- Periodic traffic to suspicious external IP with consistent intervals
+- Large data transfers following beacon requests
+- TLS encrypted tunnels to C2 server
 
 ### What would refute this hypothesis:
-- No periodic traffic patterns detected
-- Traffic matches known legitimate CDN or API endpoints
-- JA3 fingerprints associated with legitimate software
+- Traffic matches known legitimate service patterns
+- No correlation between beacon intervals and data transfers
 
 ### Evidence Found:
-[Fill after analysis]
+- **C2 IP**: 185.27.134.154 (6,498 packets - highest volume)
+- **Beacon pattern**: Traffic spikes at seconds 4-5 (4,860 frames, 6.8M bytes)
+- **Data exfil**: HTTP GET to /arquivo_2026*.txt (Portuguese for "archive")
+- **IP discovery**: GET to icanhazip.com
 
-**Packet ranges**: 
-**Beacon interval**: seconds
-**Destination**: IP/domain
+**Packet ranges**: 3000-4000, 5000-6000
+**Key indicators**: Domain scxzswx.lovestoblog.com, IP 185.27.134.154
 
-### Verdict: [CONFIRMED / REFUTED / INCONCLUSIVE]
-**Confidence**: 
-**Reasoning**:
+### Verdict: CONFIRMED
+**Confidence**: High
+**Reasoning**: Large data transfers to suspicious domain with random subdomain pattern, combined with IP discovery, indicates active data theft.
 
----
-
-## Hypothesis 3: Data Exfiltration via DNS Tunneling
+## Hypothesis 2: Initial Infection via Malicious Download
 
 ### What would confirm this hypothesis:
-- Long DNS queries with subfields containing encoded data
-- High volume of TXT or MX record requests
-- Unusually large DNS response packets
+- HTTP GET to a suspicious domain delivering executable/content
+- User-Agent strings indicating automated download
+- Sequential file requests (archive files)
 
 ### What would refute this hypothesis:
-- DNS traffic consistent with normal resolution patterns
-- No TXT/AAAA/MX queries to suspicious domains
-- Query lengths under 50 characters (normal range)
+- All downloads are to legitimate software repositories
+- Traffic matches normal browsing patterns
 
 ### Evidence Found:
-[Fill after analysis]
+- Sequential requests to arquivo_20260129190534.txt and arquivo_20260129190545.txt
+- Random subdomain pattern (scxzswx.lovestoblog.com) - not legitimate
+- 5-second difference between file requests
 
-**Packet ranges**:
-**Suspicious domains**:
-**Encoded patterns observed**:
+**Packet ranges**: Around second 4-6
+**Downloaded files**: Two .txt files from suspicious domain
 
-### Verdict: [CONFIRMED / REFUTED / INCONCLUSIVE]
-**Confidence**: 
-**Reasoning**:
+### Verdict: CONFIRMED
+**Confidence**: Medium
+**Reasoning**: Sequential file downloads from suspicious domain suggest staged payload delivery.
 
----
+## Hypothesis 3: DNS Tunneling for C2 Communication
+
+### What would confirm this hypothesis:
+- Long/encoded DNS query names
+- TXT record requests to suspicious domains
+- High volume of DNS traffic
+
+### What would refute this hypothesis:
+- DNS queries are for legitimate domains
+- Query patterns match normal resolution
+
+### Evidence Found:
+- DNS queries to exczx.com (random string domain)
+- DNS to scxzswx.lovestoblog.com (random subdomain pattern)
+- Limited DNS volume (not primary channel)
+
+**Suspicious domains**: exczx.com, scxzswx.lovestoblog.com
+**Query patterns**: Random alphanumeric subdomains
+
+### Verdict: PARTIALLY CONFIRMED
+**Confidence**: Low-Medium
+**Reasoning**: Suspicious domains present but DNS volume low; likely used for initial resolution, not primary tunneling.
 
 ## Summary Table
 
 | Hypothesis | Verdict | Confidence | Key Evidence |
 |------------|---------|------------|--------------|
-| Malicious document download | | | |
-| Cobalt Strike beaconing | | | |
-| DNS tunneling exfiltration | | | |
+| C2 Beaconing & Exfiltration | CONFIRMED | High | 185.27.134.154 (6,498 packets), 6.8MB transfer at 4-5 sec |
+| Malicious Download | CONFIRMED | Medium | Sequential file downloads from suspicious domain |
+| DNS Tunneling | PARTIALLY CONFIRMED | Low-Medium | Suspicious domains exczx.com, lovestoblog.com |
 
-**Overall assessment**: [One paragraph synthesizing what the traffic actually represents]
+**Overall assessment**: The PhantomStealer infection shows clear C2 beaconing to 185.27.134.154 with large data exfiltration (6.8MB at 4-5 seconds). The malware first discovers the victim's public IP via icanhazip.com, then exfiltrates data to scxzswx.lovestoblog.com. This matches the Meridian FinServe scenario of anomalous east-west and outbound traffic.
