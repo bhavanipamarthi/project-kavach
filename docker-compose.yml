@@ -1,14 +1,14 @@
 version: '3.8'
+
 services:
   dvwa:
-    image: vulnerables/web-dvwa:latest
-    container_name: kavach-dvwa
+    image: vulnerables/web-dvwa
     ports:
       - "8085:80"
     restart: unless-stopped
+
   juice-shop:
-    image: bkimminich/juice-shop:latest
-    container_name: kavach-juice-shop
+    image: bkimminich/juice-shop
     ports:
-      - "4280:3000"
+      - "3001:3000"
     restart: unless-stopped
