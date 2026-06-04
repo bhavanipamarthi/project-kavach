@@ -1,18 +1,35 @@
-# Current Architecture (Before)
+# Current Architecture (Before Hardening)
 
 ```mermaid
-graph TD
-    A[Branch Offices] --> B[Server Segment]
-    B --> C[Web Portal Servers]
-    B --> D[Internal DB]
-    C --> E[Internet - No Egress Filter]
-    B --> F[External C2 Servers]
-    style F fill:#ffcccc
-
-Current State Issues:
-
-Flat network → Easy lateral movement
-No egress filtering → C2 beaconing possible
-Weak segmentation between web and internal servers
-
-
+graph TB
+    subgraph "Branch Offices (9 cities)"
+        B1[Branch Router]
+        B2[Branch Users]
+    end
+    
+    subgraph "Data Center"
+        subgraph "Server Segment (Compromised)"
+            WEB[Web Server<br/>Customer Portal]
+            DB[(Database<br/>Customer Data)]
+            APP[App Server<br/>Internal Tools]
+        end
+        FW[Firewall<br/>Minimal Rules]
+    end
+    
+    subgraph "Cloud Footprint"
+        CLOUD[Cloud Resources<br/>Public IPs]
+    end
+    
+    INTERNET((Internet))
+    
+    B1 --> FW
+    B2 --> WEB
+    WEB --> DB
+    WEB --> APP
+    APP --> INTERNET
+    FW --> CLOUD
+    
+    style WEB fill:#ff9999
+    style DB fill:#ff9999
+    style APP fill:#ff9999
+    style INTERNET fill:#ffcccc
