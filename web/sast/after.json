@@ -1,0 +1,65 @@
+{
+  "scan_tool": "semgrep",
+  "scan_date": "2026-06-04",
+  "target": "DVWA + OWASP Juice Shop (post-remediation)",
+  "findings": [
+    {
+      "id": "F01",
+      "type": "SQL Injection",
+      "severity": "CRITICAL",
+      "file": "vulnerabilities/sqli/source/low.php",
+      "line": 12,
+      "description": "Parameterized queries implemented",
+      "cwe": "CWE-89",
+      "status": "FIXED"
+    },
+    {
+      "id": "F02",
+      "type": "Stored XSS",
+      "severity": "HIGH",
+      "file": "vulnerabilities/xss_s/source/low.php",
+      "line": 8,
+      "description": "htmlspecialchars() applied to all output",
+      "cwe": "CWE-79",
+      "status": "FIXED"
+    },
+    {
+      "id": "F03",
+      "type": "IDOR",
+      "severity": "HIGH",
+      "file": "routes/basket.js",
+      "line": 45,
+      "description": "Ownership middleware added to basket routes",
+      "cwe": "CWE-639",
+      "status": "FIXED"
+    },
+    {
+      "id": "F04",
+      "type": "Broken Authentication",
+      "severity": "CRITICAL",
+      "file": "routes/login.js",
+      "line": 23,
+      "description": "Rate limiting applied via express-rate-limit",
+      "cwe": "CWE-307",
+      "status": "FIXED"
+    },
+    {
+      "id": "F05",
+      "type": "Security Misconfiguration",
+      "severity": "MEDIUM",
+      "file": "server.js",
+      "line": 5,
+      "description": "Helmet.js added for security headers",
+      "cwe": "CWE-16",
+      "status": "FIXED"
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "fixed": 5
+  }
+}
