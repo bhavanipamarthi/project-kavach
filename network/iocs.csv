@@ -1,7 +1,6 @@
-Indicator,Type,Confidence,PacketRange,Notes
-185.203.117.XX,IP,High,100-450,C2 Beaconing Server (Hancitor)
-91.92.XX.XX,IP,High,500-850,Ficker Stealer C2
-hancitor[.]example[.]com,Domain,Medium,1200+,DNS Beaconing
-JA3:d0a8e3f9...,JA3 Fingerprint,High,Multiple,Cobalt Strike pattern
-Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0),User-Agent,Medium,Many,Malware common UA
-/somepayload.exe,URI,High,Exfil,Data Exfiltration attempt
+indicator_type,indicator_value,confidence,packet_ranges,description,source_ip,dest_ip,timestamp_first,timestamp_last
+ip_destination,185.130.5.253,High,"4500-5200, 8900-9100",Cobalt Strike C2 server,192.168.1.105,185.130.5.253,2021-05-13 14:23:10,2021-05-13 18:45:22
+domain,evil.c2domain.com,High,"8900-9100",Beaconing domain,192.168.1.105,185.130.5.253,2021-05-13 14:23:15,2021-05-13 18:45:18
+ja3_hash,51c64c77e60f3980eea90869b68c58a8,Medium,"8900-9000",Cobalt Strike JA3 fingerprint,192.168.1.105,185.130.5.253,2021-05-13 14:23:20,2021-05-13 14:23:25
+user_agent,Mozilla/5.0 (Windows NT 10.0; Win64; x64),Low,"4500-4600",Suspicious User-Agent,192.168.1.105,185.130.5.253,2021-05-13 14:23:10,2021-05-13 14:23:10
+ip_source,192.168.1.105,High,"4500-5200, 8900-9100",Compromised internal host,,,,2021-05-13 14:23:10,2021-05-13 18:45:22
