@@ -16,7 +16,7 @@
 - No correlation between beacon intervals and data transfers
 
 ### Evidence Found:
-- **C2 IP**: 185.27.134.154 (6,498 packets - highest volume)
+- **C2 IP**: 185.27.134.154 (6,498 packets - highest volume in capture)
 - **Beacon pattern**: Traffic spikes at seconds 4-5 (4,860 frames, 6.8M bytes)
 - **Data exfil**: HTTP GET to /arquivo_2026*.txt (Portuguese for "archive")
 - **IP discovery**: GET to icanhazip.com
@@ -27,6 +27,8 @@
 ### Verdict: CONFIRMED
 **Confidence**: High
 **Reasoning**: Large data transfers to suspicious domain with random subdomain pattern, combined with IP discovery, indicates active data theft.
+
+---
 
 ## Hypothesis 2: Initial Infection via Malicious Download
 
@@ -51,6 +53,8 @@
 **Confidence**: Medium
 **Reasoning**: Sequential file downloads from suspicious domain suggest staged payload delivery.
 
+---
+
 ## Hypothesis 3: DNS Tunneling for C2 Communication
 
 ### What would confirm this hypothesis:
@@ -73,6 +77,8 @@
 ### Verdict: PARTIALLY CONFIRMED
 **Confidence**: Low-Medium
 **Reasoning**: Suspicious domains present but DNS volume low; likely used for initial resolution, not primary tunneling.
+
+---
 
 ## Summary Table
 
