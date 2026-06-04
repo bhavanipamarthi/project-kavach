@@ -13,26 +13,64 @@
 | Data | DLP solution for outbound data | L | Cost, potential false positives |
 | Observability | NSM + SIEM with baseline alerting | M | Storage costs, staffing needs |
 
-### Architecture Diagram:
-Internet
-|
-v
-[Next-Gen Firewall + Egress Filtering + DNS Filtering]
-|
-v
-[TLS Inspector]
-|
-v
-[WAF - OWASP Rules]
-|
-v
-+-------+-------+-------+
-| | | |
-v v v v
-DMZ App Data Jump
-Web Server Base Host
-Server (Encrypted)
+### Mermaid Diagram:
 
+ `mermaid graph TB
+    subgraph "Branch Offices (9 cities)"
+        B1[Branch Router<br/>VPN Required]
+        B2[Branch Users<br/>MFA Enabled]
+    end
+    
+    subgraph "Data Center - Defense in Depth"
+        
+        subgraph "Perimeter Layer"
+            FW1[Next-Gen Firewall<br/>Egress Filtering<br/>DNS Filtering]
+            INSPECT[TLS Inspector<br/>Decrypt & Inspect]
+            WAF[WAF - OWASP Rules]
+        end
+        
+        subgraph "DMZ - Public Facing"
+            WEB[Web Server<br/>Customer Portal<br/>No Direct Internet]
+        end
+        
+        subgraph "Application Tier"
+            APP[App Server<br/>Internal Tools<br/>Jump Host Required]
+        end
+        
+        subgraph "Data Tier"
+            DB[(Database<br/>Encrypted at Rest<br/>No Internet Access)]
+        end
+        
+        subgraph "Observability"
+            SIEM[SIEM + NSM<br/>NetFlow + App Logs<br/>Anomaly Detection]
+            SOAR[SOAR - Automated Response]
+        end
+        
+        JUMP[Secure Jump Host<br/>Session Recorded]
+    end
+    
+    subgraph "Internet"
+        BLOCKED[Malicious C2<br/>BLOCKED]
+    end
+    
+    B1 --> FW1
+    B2 --> WAF
+    FW1 --> INSPECT
+    INSPECT --> WAF
+    WAF --> WEB
+    WEB --> JUMP
+    JUMP --> APP
+    APP --> DB
+    WEB --> SIEM
+    APP --> SIEM
+    DB --> SIEM
+    SIEM --> SOAR
+    SOAR -.-> FW1
+    
+    style BLOCKED fill:#00ff00
+    style FW1 fill:#99ff99
+    style INSPECT fill:#99ff99
+    style SIEM fill:#99ccff
 
 ### Defense in Depth Layers with Citations:
 
@@ -42,9 +80,9 @@ Server (Encrypted)
 | **Perimeter** | Egress/DNS filtering | DNS to exczx.com succeeded | S | May block legit domains |
 | **Segmentation** | Micro-segmentation | Direct outbound from internal server | M | Management complexity |
 | **Application** | TLS inspection | Encrypted TLSv1.2 C2 traffic | M | 5-10% performance hit |
-| **Data** | DLP + Encryption | 6.8MB exfiltration at 4-5 seconds | L | $50K+ annually |
-| **Observability** | NSM + SIEM | 6,498 packets to C2 generated no alerts | M | Staff training required |
-| **Response** | SOAR automation | 72-hour response window in brief | L | False positive risk |
+| **Data** | DLP + Encryption | 6.8MB exfiltration | L | $50K+ annually |
+| **Observability** | NSM + SIEM | 6,498 packets to C2 | M | Staff training |
+| **Response** | SOAR automation | 72-hour response window | L | False positive risk |
 
 ### Expected Outcomes After Hardening:
 
