@@ -1,19 +1,55 @@
 # Proposed Architecture (After)
 
+# Proposed Hardened Architecture
+
 ```mermaid
-graph TD
-    A[Branch Offices] --> G[Jump Host]
-    G --> B[Micro-Segmented Server Segment]
-    B --> C[Web Portal Servers]
-    B --> D[Internal DB]
-    C --> H[WAF + Egress Filter]
-    H --> E[Internet]
-    B -.-> I[East-West Microsegmentation]
-    style I fill:#90EE90
-
-Key Improvements:
-
-Jump hosts for admin access
-East-West microsegmentation
-Egress filtering + WAF
-Better containment of compromised servers
+graph TB
+    subgraph "Branch Offices (9 cities)"
+        B1[Branch Router]
+        B2[Branch Users<br/>MFA Required]
+    end
+    
+    subgraph "Data Center - Perimeter Layer"
+        FW1[Next-Gen Firewall<br/>Egress Filtering + DNS Filtering]
+        IPS[IPS/IDS Sensors]
+    end
+    
+    subgraph "Data Center - Segmented Network"
+        subgraph "DMZ - Public Facing"
+            WEB[Web Server<br/>Customer Portal<br/>WAF Enabled]
+        end
+        
+        subgraph "Application Tier"
+            APP[App Server<br/>Internal Tools<br/>No Direct Internet]
+        end
+        
+        subgraph "Data Tier"
+            DB[(Database<br/>Encrypted at Rest<br/>No Internet Access)]
+        end
+        
+        subgraph "Management Jump Host"
+            JUMP[Secure Jump Host<br/>Session Recording]
+        end
+    end
+    
+    subgraph "Observability Layer"
+        SIEM[SIEM + NSM<br/>NetFlow + App Logs]
+    end
+    
+    INTERNET((Internet))
+    
+    B1 --> FW1
+    B2 --> WEB
+    FW1 --> WEB
+    WEB --> APP
+    APP --> DB
+    WEB -.-> JUMP
+    APP -.-> JUMP
+    WEB --> SIEM
+    APP --> SIEM
+    DB --> SIEM
+    
+    style WEB fill:#99ff99
+    style APP fill:#99ff99
+    style DB fill:#99ff99
+    style JUMP fill:#99ccff
