@@ -1,6 +1,4 @@
 # LLM Prompt Log - Bhavani
-
-# LLM Prompt Log - Bhavani
 **Course:** Post Graduation Certificate Program In AI/GenAI Powered Cybersecurity - IIT Roorkee
 **Student:** Bhavani
 **Last Updated:** 2026-06-05
