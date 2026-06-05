@@ -1,21 +1,25 @@
-# PCAP files (too large for GitHub)
+# Large binaries / data
 *.pcap
 *.pcapng
-*.cap
+*.evtx
+*.log
+network/pcap/*
 
-# Environment
+# Environment / secrets
 .env
 *.key
 *.pem
 
-# Python
-__pycache__/
-*.pyc
-
-# IDE
+# OS / IDE
+.DS_Store
 .vscode/
 .idea/
-.DS_Store
+__pycache__/
+*.py[cod]
 
-# Logs
-*.log
+# Docker
+docker-compose.override.yml
+
+# Temporary
+*.tmp
+*.bak
