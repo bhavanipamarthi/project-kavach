@@ -1,0 +1,4 @@
+Prompt: "Perform a detailed STRIDE threat model for a Docker-based lab containing DVWA and OWASP Juice Shop applications. Include per-component analysis."
+Tool: Grok
+Output: Comprehensive table with threats and mitigations.
+What I did: Expanded the Spoofing and Elevation of Privilege sections with real attack examples from our environment.
