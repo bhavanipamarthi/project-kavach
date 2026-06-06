@@ -1,0 +1,4 @@
+Prompt: "Write a one-page non-technical executive summary for a security assessment"
+Tool: Grok
+Output: Good starting draft.
+What I did: Customized it heavily to match our specific findings (C2 + SQLi).

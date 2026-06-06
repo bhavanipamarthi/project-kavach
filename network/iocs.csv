@@ -1,0 +1,11 @@
+indicator_type,indicator_value,confidence,packet_ranges,description,source_ip,dest_ip
+ip_destination,185.27.134.154,High,"3000-4000, 5000-6000",Primary C2 server for PhantomStealer,10.1.30.101,185.27.134.154
+ip_destination,104.16.78.6,Medium,"2000-3000",Cloudflare IP (potential C2 proxy),10.1.30.101,104.16.78.6
+ip_destination,185.38.151.11,Medium,"8500-8700",Secondary C2 with TLS traffic,10.1.30.101,185.38.151.11
+domain,scxzswx.lovestoblog.com,High,"4000-5000",Suspicious C2 domain with random subdomain,10.1.30.101,185.27.134.154
+domain,exczx.com,Medium,"3000-4000",Random string domain - potential DGA,10.1.30.101,185.27.134.154
+domain,icanhazip.com,High,"1000-2000",IP address discovery service,10.1.30.101,104.16.78.6
+uri,/arquivo_20260129190534.txt,High,"4000-5000",Data exfiltration file (Portuguese for archive),10.1.30.101,185.27.134.154
+uri,/arquivo_20260129190545.txt,High,"5000-6000",Data exfiltration file (Portuguese for archive),10.1.30.101,185.27.134.154
+user_agent,HTTP/1.1 client,Medium,"3000-6000",Generic User-Agent (no browser string),10.1.30.101,185.27.134.154
+protocol,TLSv1.2,High,"8500-8700",Encrypted C2 traffic - invisible without inspection,10.1.30.101,185.38.151.11

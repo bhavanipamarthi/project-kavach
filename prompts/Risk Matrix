@@ -1,0 +1,4 @@
+Prompt: "Create a 5x5 risk matrix for the following findings: Hancitor C2 beacon, SQL injection in DVWA, and weak Docker network isolation."
+Tool: Deepseek
+Output: Professional markdown table with Likelihood, Impact, and Risk Score.
+What I did: Adjusted scores based on our fictional client (Meridian FinServe) context.

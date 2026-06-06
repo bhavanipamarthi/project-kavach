@@ -1,0 +1,4 @@
+Prompt: "Create a Mermaid flowchart showing the attack flow from external client → DVWA SQL injection → outbound C2 beacon to simulated attacker infrastructure."
+Tool: Grok
+Output: Clean, readable Mermaid syntax.
+What I did: Embedded it in diagrams/ and synthesis/threat-model.md.

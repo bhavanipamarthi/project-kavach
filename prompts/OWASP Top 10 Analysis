@@ -1,0 +1,4 @@
+Prompt: "List 6 exploitable OWASP Top 10 vulnerabilities in DVWA (low security) with curl PoC commands and remediation suggestions."
+Tool: Grok
+Output: Excellent curl examples and clear remediation steps.
+What I did: Tested all PoCs in our lab and added screenshots + impact ratings.

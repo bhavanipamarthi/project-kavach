@@ -1,0 +1,64 @@
+{
+  "scan_tool": "semgrep",
+  "scan_date": "2026-05-28",
+  "target": "DVWA + OWASP Juice Shop",
+  "findings": [
+    {
+      "id": "F01",
+      "type": "SQL Injection",
+      "severity": "CRITICAL",
+      "file": "vulnerabilities/sqli/source/low.php",
+      "line": 12,
+      "description": "Unsanitized user input passed directly to SQL query",
+      "cwe": "CWE-89",
+      "status": "OPEN"
+    },
+    {
+      "id": "F02",
+      "type": "Stored XSS",
+      "severity": "HIGH",
+      "file": "vulnerabilities/xss_s/source/low.php",
+      "line": 8,
+      "description": "User input stored and reflected without HTML encoding",
+      "cwe": "CWE-79",
+      "status": "OPEN"
+    },
+    {
+      "id": "F03",
+      "type": "IDOR",
+      "severity": "HIGH",
+      "file": "routes/basket.js",
+      "line": 45,
+      "description": "No ownership check on basket ID parameter",
+      "cwe": "CWE-639",
+      "status": "OPEN"
+    },
+    {
+      "id": "F04",
+      "type": "Broken Authentication",
+      "severity": "CRITICAL",
+      "file": "routes/login.js",
+      "line": 23,
+      "description": "No rate limiting on login endpoint",
+      "cwe": "CWE-307",
+      "status": "OPEN"
+    },
+    {
+      "id": "F05",
+      "type": "Security Misconfiguration",
+      "severity": "MEDIUM",
+      "file": "server.js",
+      "line": 5,
+      "description": "Security headers missing (CSP, X-Frame-Options)",
+      "cwe": "CWE-16",
+      "status": "OPEN"
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "critical": 2,
+    "high": 2,
+    "medium": 1,
+    "low": 0
+  }
+}
